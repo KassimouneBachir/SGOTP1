@@ -34,6 +34,7 @@ public function destroy(User $user)
 
 public function index(Request $request)
 {
+    
     $users = User::when($request->search, function($query, $search) {
         return $query->where('name', 'like', "%$search%")
                    ->orWhere('email', 'like', "%$search%");
