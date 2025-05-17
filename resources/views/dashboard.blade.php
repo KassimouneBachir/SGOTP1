@@ -62,7 +62,9 @@
                             </svg>
                         </a>
                         <div id="settings-menu" class="profile-section ml-4 pl-2 border-l-2 border-gray-200">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Profil</a>
+                            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            Profil
+        </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md">
@@ -99,14 +101,16 @@
                                 </svg>
                             </div>
                             <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden group-hover:block">
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil</a>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                        Déconnexion
-                                    </button>
-                                </form>
-                            </div>
+    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+        Profil
+    </a>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            Déconnexion
+        </button>
+    </form>
+</div>
                         </div>
                     </div>
                 </div>
@@ -120,7 +124,7 @@
                         <div class="flex items-start justify-between">
                             <div>
                                 <h1 class="text-2xl font-bold text-gray-800">
-                                    Bonjour, {{ auth()->user()->name }}
+                                    Bonjour !, {{ auth()->user()->name }}
                                 </h1>
                                 <p class="text-gray-600 mt-2">
                                     @if(auth()->user()->role === 'admin')
