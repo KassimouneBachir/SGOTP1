@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ObjetController;   // Je l'ai ajouté pour le CRUD (Yahya)
 
 
 /*
@@ -70,8 +71,13 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::get('/', [ObjetController::class, 'welcome'])->name('home');
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::resource('objets', ObjetController::class);
+    // Optionnel : Route pour la page publique
+    Route::get('objets-publics', [ObjetController::class, 'publicIndex'])->name('objets.public');
+});
 
 
 

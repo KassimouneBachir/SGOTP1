@@ -42,8 +42,10 @@
             <h1 class="text-4xl font-bold mb-6">Retrouvez vos objets perdus sur le campus</h1>
             <p class="text-xl mb-8">La solidarité numérique du campus</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#" class="px-6 py-3 bg-blue-600 rounded-md font-medium hover:bg-blue-700 transition">Signaler un objet</a>
-                <a href="#" class="px-6 py-3 bg-white text-gray-800 rounded-md font-medium hover:bg-gray-100 transition">Objets trouvés</a>
+                <!-- Ajout des redirections pour "Signaler un objet" et "Objets trouvés"  (Yahya)   -->
+                <a href="{{ route('objets.create') }}" class="px-6 py-3 bg-blue-600 rounded-md font-medium hover:bg-blue-700 transition">Signaler un objet</a>
+                <a href="{{ route('objets.index') }}" class="px-6 py-3 bg-white text-gray-800 rounded-md font-medium hover:bg-gray-100 transition">Objets trouvés</a>
+                <!-- Fin de modification -->
             </div>
         </div>
     </section>
@@ -84,38 +86,30 @@
         </div>
     </section>
 
-    <!-- Objets récents -->
+    <!-- Objets récents (Modifié par Yahya)-->
     <section class="py-16 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-gray-800 mb-8">Objets récemment trouvés</h2>
-            
-            <div class="grid sm:grid-cols-2 gap-6">
-                <!-- Objet 1 -->
+    <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">Objets récemment trouvés</h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+            @foreach($recentObjets as $objet)
                 <div class="bg-white rounded-lg shadow overflow-hidden">
-                    <div class="h-48 bg-gray-200 flex items-center justify-center">
-                        <span class="text-gray-500">Image de l'objet</span>
-                    </div>
+                    @if($objet->photo)
+                        <img src="{{ asset('storage/'.$objet->photo) }}" alt="{{ $objet->titre }}" class="w-full h-48 object-cover">
+                    @else
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <span class="text-gray-500">Aucune image</span>
+                        </div>
+                    @endif
                     <div class="p-4">
-                        <h3 class="font-semibold text-lg">Portefeuille noir</h3>
-                        <p class="text-gray-600">Trouvé près de la bibliothèque</p>
-                        <p class="text-sm text-gray-500 mt-2">Il y a 2 jours</p>
+                        <h3 class="font-semibold text-lg">{{ $objet->titre }}</h3>
+                        <p class="text-gray-600">{{ $objet->lieu }}</p>
+                        <p class="text-sm text-gray-500 mt-2">{{ $objet->created_at->diffForHumans() }}</p>
                     </div>
                 </div>
-                
-                <!-- Objet 2 -->
-                <div class="bg-white rounded-lg shadow overflow-hidden">
-                    <div class="h-48 bg-gray-200 flex items-center justify-center">
-                        <span class="text-gray-500">Image de l'objet</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg">Clés USB</h3>
-                        <p class="text-gray-600">Trouvé en salle B204</p>
-                        <p class="text-sm text-gray-500 mt-2">Il y a 5 jours</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- CTA -->
     <section class="py-16 bg-blue-600 text-white">

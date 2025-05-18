@@ -12,3 +12,17 @@
 .admin-table td {
     @apply p-4 border-b;
 }
+
+
+
+
+/* Styles de Yahya pour CRUD */
+
+
+.object-card {
+    @apply bg-white rounded-lg shadow overflow-hidden border border-gray-200;
+}
+.btn-primary {
+    @apply bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition;
+}
+
