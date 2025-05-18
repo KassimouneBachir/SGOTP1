@@ -124,7 +124,7 @@
                         <div class="flex items-start justify-between">
                             <div>
                                 <h1 class="text-2xl font-bold text-gray-800">
-                                    Bonjour !, {{ auth()->user()->name }}
+                                    Bonjour ! {{ auth()->user()->name }}
                                 </h1>
                                 <p class="text-gray-600 mt-2">
                                     @if(auth()->user()->role === 'admin')
